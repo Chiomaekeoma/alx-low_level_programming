@@ -7,16 +7,16 @@
  */
 size_t free_listint_safe(listint_t **h)
 {
-	listint_t *goat = *h, *hare = *h, *temp, *poi;
+	listint_t *tortoise = *h, *hare = *h, *temp, *poi;
 	size_t isLoop = 0, nodes = 0;
 
 	if (!(*h))
 		return (nodes);
-	while (goat && hare && hare->next)
+	while (tortoise && hare && hare->next)
 	{
 		/* Detecting if linked list is looped */
-		goat = goat->next, hare = hare->next->next;
-		if (goat == hare)
+		tortoise = tortoise->next, hare = hare->next->next;
+		if (tortoise == hare)
 		{
 			isLoop = 1;
 			break;
@@ -28,10 +28,10 @@ size_t free_listint_safe(listint_t **h)
 			hare->next->next = NULL;
 		else
 		{
-			goat = *h;
-			while (goat != hare)
+			tortoise = *h;
+			while (tortoise != hare)
 			{
-				goat = goat->next;
+				tortoise = tortoise->next;
 				poi = hare;
 				hare = hare->next;
 			}
